@@ -17,3 +17,4 @@ hash_str = math_dll.hash_str
 hash_str.argtypes = c_char_p
 hash_str.restype = c_int
 
+base64_dll=cdll.LoadLibrary()
