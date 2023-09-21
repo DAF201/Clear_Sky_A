@@ -3,3 +3,4 @@ src/libs/__pycache__
 */*test*.*
 *test*
 *.mp4
+src/cpp/*sock*
