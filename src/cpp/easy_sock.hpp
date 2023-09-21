@@ -1,5 +1,5 @@
 #include <string>
-#include <iostream>
+#include <cstring>
 #include <cstdlib>
 #include <thread>
 #include <vector>
@@ -7,16 +7,47 @@ using namespace std;
 #ifdef _WIN32
 #include <WinSock2.h>
 #pragma comment(lib, "ws2_32.lib")
+
+#define MAX_LENGTH 1024
+
 const static int ip_type[3] = {AF_INET, AF_INET6, AF_UNIX};
 const static int sock_type[3] = {SOCK_STREAM, SOCK_DGRAM, SOCK_RAW};
+
 typedef struct sock_msg
 {
-    string ip;
-    unsigned long long time_stamp;
+    SOCKET sock;
+    int MSG_length;
+    int MSG_num;
     string MSG;
 } sock_msg;
 
 vector<sock_msg> socket_msg_queue = vector<sock_msg>();
+
+void subsocket_handler(SOCKET sub_socket)
+{
+    char buffer[MAX_LENGTH];
+    int MSG_length = 0;
+    int MSG_num = 0;
+    while (true)
+    {
+        try
+        {
+            recv(sub_socket, buffer, sizeof(buffer), 0);
+            string str_buffer = string(buffer);
+            if (str_buffer.find("_EOS_") != string::npos)
+            {
+
+                return;
+            }
+            sock_msg new_msg = {sub_socket, stoi(str_buffer.substr(0, 5)), stoi(str_buffer.substr(5, 5)), str_buffer};
+        }
+        catch (...)
+        {
+            continue;
+        }
+    }
+}
+
 class easy_sock_s
 {
 public:
@@ -65,7 +96,6 @@ private:
     int sock_size = sizeof(sockaddr_in);
     SOCKET server_sock;
     sockaddr_in server_sock_addr;
-    vector<easy_sock_sub> sub_sock = vector<easy_sock_sub>();
     thread sock_thread;
 
     void init(string IP, int port, int ip_protocal, int socket_protocal, int max_listen = 10)
@@ -86,23 +116,10 @@ private:
         while (server_status == 0)
         {
             SOCKET sub_s = accept(server_sock, (SOCKADDR *)&server_sock_addr, &sock_size);
+            thread sub_sock_thread = thread(subsocket_handler, sub_s);
+            sub_sock_thread.detach();
         }
     }
 };
 
-class easy_sock_sub
-{
-public:
-    easy_sock_sub(SOCKET sub_sock)
-    {
-        this->sub_sock = sub_sock;
-    }
-
-private:
-    SOCKET sub_sock;
-};
-#endif
-
-#ifdef linux
-// TODO
 #endif
