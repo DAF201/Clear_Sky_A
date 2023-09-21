@@ -45,11 +45,13 @@ DLL int factor(int input)
     }
     return upper_bound;
 }
+
 DLL int hash_int(int input)
 {
     srand(input);
     return (rand() * rand()) / rand();
 }
+
 DLL int hash_str(char *input)
 {
     int res = 0;

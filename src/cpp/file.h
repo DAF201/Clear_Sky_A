@@ -37,21 +37,22 @@ DLL int file_size(char *filename)
     return size;
 }
 
-DLL long long file_time(char *filename, char type)
+// dont use
+DLL long long file_time(char *filename, int type)
 {
     struct stat file_info;
 
     switch (type)
     {
-    case 'c':
+    case 0:
     {
         return file_info.st_ctime;
     }
-    case 'm':
+    case 1:
     {
         return file_info.st_mtime;
     }
-    case 'a':
+    case 2:
     {
         return file_info.st_atime;
     }
