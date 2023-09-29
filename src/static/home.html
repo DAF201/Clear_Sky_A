@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        background-color: rgb(12, 12, 12);
+    }
+    
+    .disable-select {
+        user-select: none;
+        /* supported by Chrome and Opera */
+        -webkit-user-select: none;
+        /* Safari */
+        -khtml-user-select: none;
+        /* Konqueror HTML */
+        -moz-user-select: none;
+        /* Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+    }
+    
+    .dont_touch_me {
+        display: none;
+        position: absolute;
+        z-index: 2;
+    }
+</style>
+<script>
+    async function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function dont_touch_me() {
+        document.getElementById("dtma").play()
+        document.getElementById("dtm").style.display = "block"
+        document.getElementById("main_body").disabled = true
+        await sleep(3200)
+        window.location.replace("about:blank");
+    }
+</script>
+
+<head>
+    <title>Fitness Fusion TEST PAGE</title>
+</head>
+
+<body>
+    <audio class="disable-select" id="dtma">
+        <source src="https://raw.githubusercontent.com/DAF201/DAF201/main/dont_touch_me.mp3">
+    </audio>
+    <img class="disable-select" onclick="dont_touch_me()" src="https://raw.githubusercontent.com/DAF201/DAF201/main/dont_touch_me.png" style="float: left; width: 60px;">
+    <img id="dtm" class="dont_touch_me disable-select" src="https://raw.githubusercontent.com/DAF201/DAF201/main/dont_touch_me.gif" style="width: 100vw;height: 100vh;">
+    <br>
+    <br>
+    <br>
+    <p class="disable-select" style="font-size: xx-small;color: white;">don't touch me</p>
+    <div id="main_body">
+        <p style="font-size: x-large;text-align: center;margin: 20%;color: white;">
+            this is a test page for CS 3354 2023 fall term
+        </p>
+    </div>
+</body>
+
+</html>

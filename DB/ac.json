@@ -1,0 +1,12 @@
+{
+    "test_id": {
+        "repo": {},
+        "secret": "test_secret",
+        "cookie": "",
+        "alies": {
+            "alies_repo_01": {
+                "priviliege": "rw"
+            }
+        }
+    }
+}

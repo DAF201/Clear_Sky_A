@@ -1,5 +1,7 @@
 from src.libs.handler import *
 PATH = [
     (r'/', root),
-    (r'/login', root_login)
+    (r'/login', login),
+    (r'/create_account', create_account),
+    (r'/account', account)
 ]
