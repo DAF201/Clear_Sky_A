@@ -9,20 +9,8 @@ new_account = {
     "inbox": {},
     "reqeust": {}
 }
-
-accounts = {}
+registed_accounts = {}
+oneline_accounts = {}
 
 with open('./DB/ac.json', 'r')as ac:
-    accounts = json.load(ac)
-
-
-class account:
-    def __init__(self, id, info) -> None:
-        self.id = id
-        self.info = info
-
-    def change_secret(self, secret) -> None:
-        self.info['secret'] = secret
-
-    def new_cookie(self) -> str:
-        pass
+    registed_accounts = json.load(ac)

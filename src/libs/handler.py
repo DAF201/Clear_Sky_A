@@ -20,7 +20,11 @@ class login(RequestHandler):
 
 
 class create_account(RequestHandler):
-    pass
+    def get(self):
+        self.render(STATIC_HTML % "register.html")
+
+    def post(self):
+        self.render(STATIC_HTML % "home.html")
 
 
 class account(RequestHandler):
