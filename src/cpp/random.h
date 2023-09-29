@@ -21,6 +21,44 @@ static char full_dict[] = {
     '=', '{', '}', '|', '\\', '<', ',', '>', '.', '?', '/'};
 static char *__USER = "user_";
 
+static char *shio = "shio";
+
+int hash_str(char *input, int len)
+{
+    int res = len;
+    int i = 0;
+    while (input[i] != '\0')
+    {
+        srand(i);
+        if (input[i] * input[i] % 2 == 0)
+        {
+            int temp_rand = rand();
+            if (res * temp_rand < INT_MAX && res * temp_rand > INT_MIN)
+            {
+                res *= temp_rand;
+            }
+            else
+            {
+                res /= temp_rand;
+            }
+        }
+        else
+        {
+            int temp_rand = rand();
+            if (res / temp_rand < INT_MIN && res / temp_rand > INT_MAX)
+            {
+                res /= temp_rand;
+            }
+            else
+            {
+                res *= temp_rand;
+            }
+        }
+        i++;
+    }
+    return res;
+}
+
 DLL char *random_str(int length)
 {
     char *buffer = (char *)malloc(length);
@@ -81,7 +119,18 @@ DLL char *rand_username()
     return username;
 }
 
-DLL char *rand_password()
+DLL int todays_token()
 {
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    FILE *file = fopen("./DB/secret", "r");
+    fseek(file, 0, SEEK_END);
+    int size = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    char *buffer = (char *)malloc(size);
+    fread(buffer, size, 1, file);
+    fclose(file);
+    sprintf(buffer, "%s%s%lld", buffer, shio, tm.tm_mday);
+    return hash_str(buffer, sizeof(buffer));
 }
 #endif

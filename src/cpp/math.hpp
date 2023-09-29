@@ -52,20 +52,36 @@ DLL int hash_int(int input)
     return (rand() * rand()) / rand();
 }
 
-DLL int hash_str(char *input)
+DLL int hash_str(char *input, int len)
 {
-    int res = 0;
+    int res = len;
     int i = 0;
     while (input[i] != '\0')
     {
-        srand(input[i]);
-        if (1 % 2 == 0)
+        srand(i);
+        if (input[i] * input[i] % 2 == 0)
         {
-            res *= rand();
+            int temp_rand = rand();
+            if (res * temp_rand < INT_MAX && res * temp_rand > INT_MIN)
+            {
+                res *= temp_rand;
+            }
+            else
+            {
+                res /= temp_rand;
+            }
         }
         else
         {
-            res /= rand();
+            int temp_rand = rand();
+            if (res / temp_rand < INT_MIN && res / temp_rand > INT_MAX)
+            {
+                res /= temp_rand;
+            }
+            else
+            {
+                res *= temp_rand;
+            }
         }
         i++;
     }
