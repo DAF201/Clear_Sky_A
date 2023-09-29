@@ -4,3 +4,4 @@ src/libs/__pycache__
 *test*
 *.mp4
 *sock*
+src/libs/email_config.py
