@@ -7,6 +7,18 @@
             "alies_repo_01": {
                 "priviliege": "rw"
             }
-        }
+        },
+        "email": {},
+        "inbox": {},
+        "reqeust": {}
+    },
+    "test": {
+        "secret": "test",
+        "cookie": "",
+        "repo": {},
+        "alies": {},
+        "email": {},
+        "inbox": {},
+        "reqeust": {}
     }
 }

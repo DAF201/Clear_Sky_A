@@ -5,5 +5,6 @@ PATH = [
     (r'/create_account', create_account),
     (r'/account', account),
     (r'/API', API),
-    (r'/static(.*)', STATIC)
+    (r'/static(.*)', STATIC),
+    (r'/favicon', FAVICON)
 ]

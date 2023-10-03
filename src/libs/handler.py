@@ -4,16 +4,17 @@ from glob import glob
 
 STATIC_FILES = {}
 for file_name in glob('./src/static/*.*'):
-    with open(file_name, 'r')as file:
-        STATIC_FILES[file_name.split('\\')[1]] = file.read()
+    try:
+        with open(file_name, 'r')as file:
+            STATIC_FILES[file_name.split('\\')[1]] = file.read()
+    except:
+        with open(file_name, 'rb')as file:
+            STATIC_FILES[file_name.split('\\')[1]] = file.read()
 
 
 class root(RequestHandler):
     def get(self):
         self.write(STATIC_FILES['home.html'])
-
-    def post(self):
-        self.write('NOTHING HERE')
 
 
 class login(RequestHandler):
@@ -49,10 +50,13 @@ class API(RequestHandler):
 
     def register(self):
         if (self.request.arguments['clearsky_id']
-                [0].decode() in registed_accounts.keys()):
+                [0].decode() in account_model['registed_accounts'].keys()):
             self.write(STATIC_FILES['about_blank.html'])
         else:
-            self.write("OKAY")
+            register_new_account(self.request.arguments['clearsky_id'][0].decode(
+            ), self.request.arguments['clearsky_secret'][0].decode())
+
+            self.write(STATIC_FILES['register_okay.html'])
 
 
 class STATIC(RequestHandler):
@@ -66,3 +70,8 @@ class STATIC(RequestHandler):
                 STATIC_FILES[self.request.arguments['style'][0].decode()])
             return
         self.write(" ")
+
+
+class FAVICON(RequestHandler):
+    def get(self, *arg):
+        self.write(STATIC_FILES['favico.ico'])
