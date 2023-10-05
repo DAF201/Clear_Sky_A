@@ -1,17 +1,13 @@
 from ctypes import *
 
-math_dll = cdll.LoadLibrary("/dlls/math.dll")
+math_dll = cdll.LoadLibrary("./dlls/math.dll")
 is_prime = math_dll.prime
-is_prime.argtypes = c_int
 is_prime.restype = c_int
 factor = math_dll.factor
-factor.argtypes = c_int
 factor.restype = c_int
 hash_int = math_dll.hash_int
-hash_int.argtypes = c_int
 hash_int.restype = c_int
 hash_str = math_dll.hash_str
-hash_str.argtypes = c_char_p
 hash_str.restype = c_int
 # int prime(int input)
 # int factor(int input)
@@ -19,7 +15,7 @@ hash_str.restype = c_int
 # int hash_str(char *input)
 
 
-base64_dll = cdll.LoadLibrary("/dlls/base64.dll")
+base64_dll = cdll.LoadLibrary("./dlls/base64.dll")
 base64_encode_str = base64_dll.b64_bin_encode
 base64_encode_str.restype = c_char_p
 base64_decode_str = base64_dll.b64_str_decode
@@ -30,7 +26,7 @@ base64_decode_str.restype = c_char_p
 # void b64_bin_decode(char* file_path, char* b64_data)
 
 
-file_dll = cdll.LoadLibrary("/dlls/file.dll")
+file_dll = cdll.LoadLibrary("./dlls/file.dll")
 file_write = file_dll.file_write
 file_write.restype = c_int
 file_read = file_dll.file_read

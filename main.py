@@ -18,7 +18,6 @@ accounts_update = threading.Thread(target=accounts_update_tool)
 accounts_update.daemon = True
 accounts_update.start()
 
-
 app = tornado.web.Application(PATH)
 http_server = tornado.httpserver.HTTPServer(app)
 http_server.listen(80)
