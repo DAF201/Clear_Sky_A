@@ -61,12 +61,13 @@ int hash_str(char *input, int len)
 
 DLL char *random_str(int length)
 {
-    char *buffer = (char *)malloc(length);
+    char *buffer = (char *)malloc(length + 1);
     srand(time(NULL));
     for (int i = 0; i < length; i++)
     {
         buffer[i] = char_int_dict[rand() % sizeof(char_int_dict)];
     }
+    buffer[length] = '\0';
     return buffer;
 }
 struct image

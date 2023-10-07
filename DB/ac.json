@@ -1,7 +1,6 @@
 {
     "test_account": {
         "secret": "test_secret",
-        "cookie": "",
         "repo": {},
         "email": {},
         "inbox": {},
@@ -9,7 +8,6 @@
     },
     "test": {
         "secret": "test",
-        "cookie": "",
         "repo": {},
         "email": {},
         "inbox": {},
