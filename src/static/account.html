@@ -8,7 +8,17 @@
 </head>
 
 <body onload="load_account_info()">
-    <p id="test"></p>
+    <p>
+        <form action="/API?account_modify" id="account_info">
+            <label for="email">email: </label><br>
+            <input type="text" name="email" id="email" readonly> <br>
+            <label for="secret">secret: </label><br>
+            <input type="text" name="secret" id="secret" readonly><br>
+            <label for="shared_token">shared token: </label><br>
+            <input type="text" name="shared_token" id="shared_token" readonly><br>
+            <input type="submit" value="Submit">
+        </form>
+    </p>
 </body>
 
 </html>

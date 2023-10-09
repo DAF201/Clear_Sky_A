@@ -5,10 +5,7 @@ account_module = {
     'new_account_schema':
     {
         'secret': '',
-        'repo': {},
-        'email': {},
-        'inbox': {},
-        'reqeust': {}
+        'email': '',
     },
     'repo_schema': {
         'name': '',

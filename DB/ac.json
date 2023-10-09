@@ -1,16 +1,12 @@
 {
     "test_account": {
-        "secret": "test_secret",
-        "repo": {},
-        "email": {},
-        "inbox": {},
-        "reqeust": {}
+        "secret": "test_account",
+        "email": "test_account@gmail.com",
+        "shared_token": "test_account_token"
     },
     "test": {
         "secret": "test",
-        "repo": {},
-        "email": {},
-        "inbox": {},
-        "reqeust": {}
+        "email": "test@gmail.com",
+        "shared_token": "test_token"
     }
 }

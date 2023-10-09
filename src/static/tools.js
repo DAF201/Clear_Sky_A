@@ -9,20 +9,20 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function replace(url, delay = 0, method = 'get') {
+async function replace(url, delay = 0, method = "get") {
     await sleep(delay)
-    if (method == 'get') {
+    if (method == "get") {
         window.location.replace(url)
-    } else if (method == 'post') {
-        var form = document.createElement('form');
+    } else if (method == "post") {
+        var form = document.createElement("form");
         document.body.appendChild(form);
-        form.method = 'post';
+        form.method = "post";
         form.action = url;
         form.submit();
     }
 }
 
-function httpGet(theUrl) {
+function http_get(theUrl) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
     xmlHttp.send(null);
