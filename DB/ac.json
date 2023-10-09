@@ -8,5 +8,10 @@
         "secret": "test",
         "email": "test@gmail.com",
         "shared_token": "test_token"
+    },
+    "new_account": {
+        "secret": "new_secret",
+        "email": "email@email.email",
+        "shared_token": "0RNkLGgA"
     }
 }

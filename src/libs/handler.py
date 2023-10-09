@@ -2,9 +2,8 @@ from tornado.web import RequestHandler
 from src.libs.account import account_module, register_new_account
 from glob import glob
 from tornado_http_auth import auth_required, DigestAuthMixin
-from src.libs.external_tools import math_dll, rand_dll
-from re import match
-import json
+from json import dumps
+
 STATIC_FILES = {}
 
 for file_name in glob('./src/static/*.*'):
@@ -20,6 +19,9 @@ class root(RequestHandler):
     def get(self):
         self.write(STATIC_FILES['home.html'])
 
+    def post(self):
+        self.write('method not allowed')
+
 
 class create_account(RequestHandler):
     def get(self):
@@ -34,7 +36,7 @@ class API(DigestAuthMixin, RequestHandler):
         super().__init__(application, request, **kwargs)
         self.API_handlers = {
             'post': {
-                '/API?register': self.register
+                '/API?account_register': self.account_register
             },
             'get': {
                 '/API?account': self.account,
@@ -48,7 +50,7 @@ class API(DigestAuthMixin, RequestHandler):
     def post(self):
         self.API_handlers['post'][self.request.uri]()
 
-    def register(self):
+    def account_register(self):
         user_name = self.request.arguments['clearsky_id'][0].decode()
         secret = self.request.arguments['clearsky_secret'][0].decode()
         if len(user_name) not in range(3, 16) or len(secret) not in range(6, 16) or (user_name in account_module['registed_accounts'].keys()):
@@ -63,8 +65,22 @@ class API(DigestAuthMixin, RequestHandler):
 
     @auth_required(realm='Protected', auth_func=account_module['id_secret_combo'].get)
     def account_info(self):
-        self.write(json.dumps(account_module['registed_accounts'][self.request.headers.get(
+        self.write(dumps(account_module['registed_accounts'][self.request.headers.get(
             'Authorization').split(',')[0].split(' ')[1].replace('username=', '').replace("\"", '')]))
+
+
+class account_modify(DigestAuthMixin, RequestHandler):
+
+    @auth_required(realm='Protected', auth_func=account_module['id_secret_combo'].get)
+    def post(self):
+        user_name = self.request.headers.get('Authorization').split(',')[0].split(' ')[
+            1].replace('username=', '').replace("\"", '')
+        account_module['registed_accounts'][user_name]['email'] = self.request.arguments['email'][0].decode()
+        account_module['registed_accounts'][user_name]['secret'] = self.request.arguments['secret'][0].decode()
+        account_module['registed_accounts'][user_name]['shared_token'] = self.request.arguments['shared_token'][0].decode()
+        account_module['id_secret_combo'][user_name] = self.request.arguments['secret'][0].decode()
+        account_module['update_required'] = 1
+        self.write('okay')
 
 
 class STATIC(RequestHandler):

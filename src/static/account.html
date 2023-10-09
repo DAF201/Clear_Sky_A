@@ -9,13 +9,13 @@
 
 <body onload="load_account_info()">
     <p>
-        <form action="/API?account_modify" id="account_info">
+        <form action="/account_modify" method="post" id="account_info">
             <label for="email">email: </label><br>
-            <input type="text" name="email" id="email" readonly> <br>
+            <input type="text" name="email" id="email"> <br>
             <label for="secret">secret: </label><br>
-            <input type="text" name="secret" id="secret" readonly><br>
+            <input type="text" name="secret" id="secret"><br>
             <label for="shared_token">shared token: </label><br>
-            <input type="text" name="shared_token" id="shared_token" readonly><br>
+            <input type="text" name="shared_token" id="shared_token"><br>
             <input type="submit" value="Submit">
         </form>
     </p>
