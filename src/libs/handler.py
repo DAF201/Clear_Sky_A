@@ -3,6 +3,7 @@ from src.libs.account import account_module, register_new_account
 from glob import glob
 from tornado_http_auth import auth_required, DigestAuthMixin
 from json import dumps
+from src.libs.config import TODAYS_TOKEN
 
 STATIC_FILES = {}
 
@@ -53,6 +54,10 @@ class API(DigestAuthMixin, RequestHandler):
     def account_register(self):
         user_name = self.request.arguments['clearsky_id'][0].decode()
         secret = self.request.arguments['clearsky_secret'][0].decode()
+        token = self.request.arguments['clearsky_token'][0].decode()
+        if token != TODAYS_TOKEN:
+            self.write("SERVER TOKEN FAILED")
+            return
         if len(user_name) not in range(3, 16) or len(secret) not in range(6, 16) or (user_name in account_module['registed_accounts'].keys()):
             self.write(STATIC_FILES['about_blank.html'])
         else:

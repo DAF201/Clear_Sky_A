@@ -132,6 +132,6 @@ DLL int todays_token()
     fread(buffer, size, 1, file);
     fclose(file);
     sprintf(buffer, "%s%s%lld", buffer, shio, tm.tm_mday);
-    return hash_str(buffer, sizeof(buffer));
+    return abs(hash_str(buffer, sizeof(buffer)));
 }
 #endif

@@ -37,3 +37,4 @@ file_read.restype = c_char_p
 
 rand_dll = cdll.LoadLibrary(r"./dlls/rand.dll")
 rand_dll.random_str.restype = c_char_p
+rand_dll.todays_token.restype = c_int

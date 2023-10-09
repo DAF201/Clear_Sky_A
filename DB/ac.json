@@ -13,5 +13,15 @@
         "secret": "new_secret",
         "email": "email@email.email",
         "shared_token": "0RNkLGgA"
+    },
+    "test_ac": {
+        "secret": "test",
+        "email": "email@email.email",
+        "shared_token": "zry6IBAL"
+    },
+    "testing": {
+        "secret": "djkhfkhfjk",
+        "email": "email@email.email",
+        "shared_token": "9M24Ju77"
     }
 }
