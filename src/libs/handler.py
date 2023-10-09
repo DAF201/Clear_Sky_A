@@ -41,7 +41,8 @@ class API(DigestAuthMixin, RequestHandler):
             },
             'get': {
                 '/API?account': self.account,
-                '/API?account_info': self.account_info
+                '/API?account_info': self.account_info,
+                '/API?account_logout': self.account_logout
             }
         }
 
@@ -58,7 +59,7 @@ class API(DigestAuthMixin, RequestHandler):
         if token != TODAYS_TOKEN:
             self.write("SERVER TOKEN FAILED")
             return
-        if len(user_name) not in range(3, 16) or len(secret) not in range(6, 16) or (user_name in account_module['registed_accounts'].keys()):
+        if len(user_name) not in range(2, 16) or len(secret) not in range(4, 16) or (user_name in account_module['registed_accounts'].keys()):
             self.write(STATIC_FILES['about_blank.html'])
         else:
             register_new_account(user_name, secret)
@@ -73,6 +74,10 @@ class API(DigestAuthMixin, RequestHandler):
         self.write(dumps(account_module['registed_accounts'][self.request.headers.get(
             'Authorization').split(',')[0].split(' ')[1].replace('username=', '').replace("\"", '')]))
 
+    @auth_required(realm='Protected', auth_func=account_module['id_secret_combo'].get)
+    def account_logout(self):
+        self.send_error(401)
+
 
 class account_modify(DigestAuthMixin, RequestHandler):
 
@@ -85,7 +90,7 @@ class account_modify(DigestAuthMixin, RequestHandler):
         account_module['registed_accounts'][user_name]['shared_token'] = self.request.arguments['shared_token'][0].decode()
         account_module['id_secret_combo'][user_name] = self.request.arguments['secret'][0].decode()
         account_module['update_required'] = 1
-        self.write('okay')
+        self.write(STATIC_FILES['okay.html'])
 
 
 class STATIC(RequestHandler):
