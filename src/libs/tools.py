@@ -9,13 +9,15 @@ LAST_GENERATION = datetime.now()
 
 
 def server_secret_generate_tool():
+    global LAST_GENERATION
     if (datetime.now() - LAST_GENERATION).days > 1:
         new_token = rand_dll.todays_token()
-        print('today\'s token :'+new_token)
+        print('today\'s token :'+str(new_token))
         with open('./DB/secret', 'w')as secret:
             secret.write(str(new_token))
         global TODAYS_TOKEN
         TODAYS_TOKEN = new_token
+        LAST_GENERATION = datetime.now()
 
 
 def helper_tool():

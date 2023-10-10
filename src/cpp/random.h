@@ -29,7 +29,6 @@ int hash_str(char *input, int len)
     int i = 0;
     while (input[i] != '\0')
     {
-        srand(i);
         if (input[i] * input[i] % 2 == 0)
         {
             int temp_rand = rand();
@@ -125,13 +124,10 @@ DLL int todays_token()
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     FILE *file = fopen("./DB/secret", "r");
-    fseek(file, 0, SEEK_END);
-    int size = ftell(file);
-    fseek(file, 0, SEEK_SET);
-    char *buffer = (char *)malloc(size);
-    fread(buffer, size, 1, file);
-    fclose(file);
-    sprintf(buffer, "%s%s%lld", buffer, shio, tm.tm_mday);
+    char *buffer = (char *)malloc(24);
+    fgets(buffer, 16, file);
+    buffer[16] = '\0';
+    strcat(buffer, shio);
     return abs(hash_str(buffer, sizeof(buffer)));
 }
 #endif

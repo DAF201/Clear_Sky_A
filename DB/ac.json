@@ -1,1 +1,12 @@
-{"test": {"secret": "test01", "email": "email@email.email", "shared_token": "5zHsA5Xe"}}
+{
+    "test": {
+        "secret": "test01",
+        "email": "email@email.email",
+        "shared_token": "5zHsA5Xe"
+    },
+    "test_account": {
+        "secret": "new_secret",
+        "email": "email@email.email",
+        "shared_token": "2haXInNl"
+    }
+}
