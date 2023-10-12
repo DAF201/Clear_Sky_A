@@ -3,6 +3,8 @@
 #include "dll.hpp"
 #include <cmath>
 #include <random>
+#include <time.h>
+
 DLL int prime(int input)
 {
     if (input == 2 || input == 3)
@@ -58,7 +60,6 @@ DLL int hash_str(char *input, int len)
     int i = 0;
     while (input[i] != '\0')
     {
-        srand(i);
         if (input[i] * input[i] % 2 == 0)
         {
             int temp_rand = rand();
@@ -86,5 +87,18 @@ DLL int hash_str(char *input, int len)
         i++;
     }
     return res;
+}
+
+int rand_range(int lower, int upper)
+{
+    if (upper > lower)
+    {
+        srand(time(NULL));
+        return lower + rand() % (upper - lower);
+    }
+    else
+    {
+        return 0;
+    }
 }
 #endif

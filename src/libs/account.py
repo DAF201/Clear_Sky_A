@@ -1,5 +1,4 @@
 from json import dump, load
-from time import sleep
 
 # for socket_server to import account_module without causing path error
 DLL_loaded = 0

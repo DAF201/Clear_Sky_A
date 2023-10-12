@@ -23,7 +23,7 @@ static char *__USER = "user_";
 
 static char *shio = "shio";
 
-int hash_str(char *input, int len)
+DLL int hash_str(char *input, int len)
 {
     int res = len;
     int i = 0;

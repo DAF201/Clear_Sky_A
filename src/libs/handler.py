@@ -57,7 +57,7 @@ class API(DigestAuthMixin, RequestHandler):
         secret = self.request.arguments['clearsky_secret'][0].decode()
         token = self.request.arguments['clearsky_token'][0].decode()
         if token != TODAYS_TOKEN:
-            self.write("SERVER TOKEN FAILED")
+            self.write('SERVER TOKEN FAILED')
             return
         if len(user_name) not in range(2, 16) or len(secret) not in range(4, 16) or (user_name in account_module['registed_accounts'].keys()):
             self.write(STATIC_FILES['about_blank.html'])
@@ -72,7 +72,7 @@ class API(DigestAuthMixin, RequestHandler):
     @auth_required(realm='Protected', auth_func=account_module['id_secret_combo'].get)
     def account_info(self):
         self.write(dumps(account_module['registed_accounts'][self.request.headers.get(
-            'Authorization').split(',')[0].split(' ')[1].replace('username=', '').replace("\"", '')]))
+            'Authorization').split(',')[0].split(' ')[1].replace('username=', '').replace('\"', '')]))
 
     @auth_required(realm='Protected', auth_func=account_module['id_secret_combo'].get)
     def account_logout(self):
@@ -84,7 +84,7 @@ class account_modify(DigestAuthMixin, RequestHandler):
     @auth_required(realm='Protected', auth_func=account_module['id_secret_combo'].get)
     def post(self):
         user_name = self.request.headers.get('Authorization').split(',')[0].split(' ')[
-            1].replace('username=', '').replace("\"", '')
+            1].replace('username=', '').replace('\"', '')
         account_module['registed_accounts'][user_name]['email'] = self.request.arguments['email'][0].decode()
         account_module['registed_accounts'][user_name]['secret'] = self.request.arguments['secret'][0].decode()
         account_module['registed_accounts'][user_name]['shared_token'] = self.request.arguments['shared_token'][0].decode()
@@ -103,7 +103,7 @@ class STATIC(RequestHandler):
             self.write(
                 STATIC_FILES[self.request.arguments['style'][0].decode()])
             return
-        self.write(" ")
+        self.write(' ')
 
 
 class FAVICON(RequestHandler):
