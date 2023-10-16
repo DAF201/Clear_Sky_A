@@ -3,6 +3,8 @@
 #include "dll.hpp"
 #include <regex>
 #include <string>
+#include <vector>
+
 DLL int regex_count(char *str, char *pattern)
 {
     std::string source = std::string(str);
@@ -50,10 +52,6 @@ DLL char *str_replace(char *str, char *pattern, char *new_str)
     std::string target = std::string(new_str);
     std::regex original(pattern);
     return (char *)std::regex_replace(source, original, target).c_str();
-}
-
-DLL char *str_slice(char *str, char *delimeter)
-{
 }
 
 #endif

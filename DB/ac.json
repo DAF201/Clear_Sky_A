@@ -1,1 +1,17 @@
-{"test": {"secret": "test01", "email": "email@email.email", "shared_token": "5zHsA5Xe"}, "test_account": {"secret": "new_secret", "email": "email@email.email", "shared_token": "2haXInNl"}, "test_account_01": {"secret": "test_secret_01", "email": "email@email.email", "shared_token": "gRqdEet6"}}
+{
+    "test": {
+        "secret": "test01",
+        "email": "email@email.email",
+        "shared_token": "5zHsA5Xe"
+    },
+    "test_account": {
+        "secret": "new_secret",
+        "email": "email@email.email",
+        "shared_token": "2haXInNl"
+    },
+    "test_account_01": {
+        "secret": "test_secret_01",
+        "email": "email@email.email",
+        "shared_token": "gRqdEet6"
+    }
+}
