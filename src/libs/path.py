@@ -1,5 +1,5 @@
 from src.libs.handler import *
-PATH = [
+ROUTE_PATH = [
     (r'/', root),
     (r'/create_account', create_account),
     (r'/account_modify', account_modify),

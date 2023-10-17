@@ -1,23 +1,26 @@
 from src.libs.account import accounts_update_tool
-from src.libs.config import TODAYS_TOKEN
+from src.libs.config import TODAYS_TOKEN, DB_PATH
 from time import sleep
 from datetime import datetime
 from src.libs.external_tools import rand_dll
 
-
-LAST_GENERATION = datetime.now()
+# record when was last time the server token being generated
+LAST_TOKEN_GENERATION_TIME = datetime.now()
 
 
 def server_secret_generate_tool():
-    global LAST_GENERATION
-    if (datetime.now() - LAST_GENERATION).days > 1:
+    global LAST_TOKEN_GENERATION_TIME
+    # generate a new one every 24h
+    if (datetime.now() - LAST_TOKEN_GENERATION_TIME).days > 1:
+        # generate a new token based on last one
         new_token = rand_dll.todays_token()
+        # update
         print('today\'s token :'+str(new_token))
-        with open('./DB/secret', 'w')as secret:
+        with open(DB_PATH+'/secret', 'w')as secret:
             secret.write(str(new_token))
         global TODAYS_TOKEN
         TODAYS_TOKEN = new_token
-        LAST_GENERATION = datetime.now()
+        LAST_TOKEN_GENERATION_TIME = datetime.now()
 
 
 def helper_tool():
@@ -30,6 +33,7 @@ def helper_tool():
             case 1:
                 server_secret_generate_tool()
                 PARSE += 1
+            # add more tool functions to here if needed
             case _:
                 PARSE = 0
         sleep(1)
