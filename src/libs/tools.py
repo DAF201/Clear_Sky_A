@@ -37,3 +37,7 @@ def helper_tool():
             case _:
                 PARSE = 0
         sleep(1)
+
+
+def bytes_to_bin(data):
+    return bin(int.from_bytes(data, 'little'))[2:].zfill(8)
