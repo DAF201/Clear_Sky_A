@@ -3,7 +3,7 @@ from src.libs.config import TODAYS_TOKEN, DB_PATH
 from time import sleep
 from datetime import datetime
 from src.libs.external_tools import rand_dll
-
+from random import shuffle
 # record when was last time the server token being generated
 LAST_TOKEN_GENERATION_TIME = datetime.now()
 

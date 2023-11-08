@@ -13,5 +13,10 @@
         "secret": "test_secret_01",
         "email": "email@email.email",
         "shared_token": "gRqdEet6"
+    },
+    "daf201": {
+        "secret": "no secret",
+        "email": "daf201@blink-in.com",
+        "shared_token": "5Zztq5tE"
     }
 }
