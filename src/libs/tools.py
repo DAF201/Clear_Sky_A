@@ -1,11 +1,22 @@
-from src.libs.account import accounts_update_tool
-from src.libs.config import TODAYS_TOKEN, DB_PATH
+from json import dump
 from time import sleep
 from datetime import datetime
+from src.libs.account import account_module
+from src.libs.config import TODAYS_TOKEN, DB_PATH
 from src.libs.external_tools import rand_dll
-from random import shuffle
+
+
 # record when was last time the server token being generated
 LAST_TOKEN_GENERATION_TIME = datetime.now()
+
+
+def accounts_update_tool():
+    # check if need to dump data into json for every 5 seconds
+    if account_module['update_alive'] and account_module['update_required']:
+        # I don't have real DB so I can just dump the whole thing to json
+        with open('./DB/ac.json', 'w')as DB:
+            dump(account_module['registed_accounts'], DB)
+        account_module['update_required'] = 0
 
 
 def server_secret_generate_tool():

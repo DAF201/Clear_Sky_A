@@ -1,4 +1,4 @@
-from json import dump, load
+from json import load
 
 # for socket_server to import account_module without causing path error
 DLL_loaded = 0
@@ -57,13 +57,3 @@ def register_new_account(id, secret, email='email@email.email', shared_token='')
     account_module['registed_accounts'][id] = temp
     account_module['update_required'] = 1
     account_module['id_secret_combo'][id] = account_module['registed_accounts'][id]['secret']
-
-
-def accounts_update_tool():
-    # check if need to dump data into json for every 5 seconds
-    if account_module['update_alive']:
-        if account_module['update_required']:
-            # I don't have real DB so I can just dump the whole thing to json
-            with open('./DB/ac.json', 'w')as DB:
-                dump(account_module['registed_accounts'], DB)
-            account_module['update_required'] = 0

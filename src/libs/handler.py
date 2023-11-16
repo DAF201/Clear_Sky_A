@@ -1,8 +1,8 @@
-from tornado.web import RequestHandler
-from src.libs.account import account_module, register_new_account
 from glob import glob
-from tornado_http_auth import auth_required, DigestAuthMixin
 from json import dumps
+from tornado.web import RequestHandler
+from tornado_http_auth import auth_required, DigestAuthMixin
+from src.libs.account import account_module, register_new_account
 from src.libs.config import TODAYS_TOKEN, STATIC_FILES_PATH
 
 # load all files in static directory
