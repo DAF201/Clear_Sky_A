@@ -51,10 +51,16 @@ class API(DigestAuthMixin, RequestHandler):
         }
 
     def get(self):
-        self.API_handlers['get'][self.request.uri]()
+        try:
+            self.API_handlers['get'][self.request.uri]()
+        except:
+            self.redirect('/')
 
     def post(self):
-        self.API_handlers['post'][self.request.uri]()
+        try:
+            self.API_handlers['post'][self.request.uri]()
+        except:
+            self.redirect('/')
 
     def account_register(self):
         user_name = self.request.arguments['clearsky_id'][0].decode()
@@ -111,19 +117,20 @@ class account_modify(DigestAuthMixin, RequestHandler):
 
 class STATIC(RequestHandler):
     # for front end to get get JS and CSS, maybe should be moved to API
-    def get(self, *args):
-        if 'script' in self.request.arguments.keys() and self.request.arguments['script'][0].endswith(b'.js'):
-            self.write(
-                STATIC_FILES[self.request.arguments['script'][0].decode()])
-            return
-        if 'style' in self.request.arguments.keys() and self.request.arguments['style'][0].endswith(b'.css'):
-            self.write(
-                STATIC_FILES[self.request.arguments['style'][0].decode()])
-            return
-        self.write(' ')
+    def get(self):
+        try:
+            self.write(STATIC_FILES[self.request.arguments.keys()[0]])
+        except:
+            self.write(b'\0')
 
 
 class FAVICON(RequestHandler):
     # frontend get FAVICON
-    def get(self, *arg):
-        self.write(STATIC_FILES['favico.ico'])
+    def get(self):
+        try:
+            self.write(STATIC_FILES['favico.ico'])
+        except:
+            self.clear()
+            self.set_status(404)
+            self.finish("<html><body>NO FOUND</body></html>")
+            return
