@@ -22,3 +22,6 @@ MODULES = [
      'port': 921
      }
 ]
+MODULES_LIST = {}
+for x in MODULES:
+    MODULES_LIST[x['id']] = (x['host'], x['port'])

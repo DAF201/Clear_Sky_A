@@ -36,7 +36,7 @@ for key in account_module['registed_accounts'].keys():
 # for new account register, require the token to register new account
 
 
-def register_new_account(id, secret, email='email@email.email', shared_token=''):
+def register_new_account(id, secret, email='email@email.email', shared_token='') -> None:
     global DLL_loaded
     # check if DLL loaded, this will cause path error if placed at the begining
     if DLL_loaded == 0:
@@ -57,3 +57,7 @@ def register_new_account(id, secret, email='email@email.email', shared_token='')
     account_module['registed_accounts'][id] = temp
     account_module['update_required'] = 1
     account_module['id_secret_combo'][id] = account_module['registed_accounts'][id]['secret']
+
+
+def verify(id, password) -> bool:
+    return account_module['id_secret_combo'][id] == password

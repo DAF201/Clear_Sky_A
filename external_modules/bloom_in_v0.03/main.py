@@ -1,3 +1,3 @@
-from include_path import PATH
+# NOT STARTED YET
 
-print(PATH)
+print('bloom-in: just to show this module being loaded')
