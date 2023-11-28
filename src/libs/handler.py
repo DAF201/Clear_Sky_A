@@ -31,7 +31,7 @@ class create_account(RequestHandler):
         self.write(STATIC_FILES['register.html'])
 
     def post(self):
-        self.write(STATIC_FILES['home.html'])
+        self.write('method not allowed')
 
 
 class API(DigestAuthMixin, RequestHandler):
@@ -50,6 +50,7 @@ class API(DigestAuthMixin, RequestHandler):
             }
         }
 
+    # distribute to different handler
     def get(self):
         try:
             self.API_handlers['get'][self.request.uri]()
@@ -67,6 +68,7 @@ class API(DigestAuthMixin, RequestHandler):
         secret = self.request.arguments['clearsky_secret'][0].decode()
         token = self.request.arguments['clearsky_token'][0].decode()
 
+        # check token, if failed end the connection
         if token != TODAYS_TOKEN:
             self.write('SERVER TOKEN FAILED')
             return
@@ -75,7 +77,7 @@ class API(DigestAuthMixin, RequestHandler):
         if (user_name in account_module['registed_accounts'].keys()) or len(user_name) not in range(2, 16) or len(secret) not in range(4, 16):
             self.write(STATIC_FILES['about_blank.html'])
         else:
-            # email not enabled yet
+            # add new account, email not enabled yet
             register_new_account(user_name, secret)
             self.write(STATIC_FILES['register_okay.html'])
 

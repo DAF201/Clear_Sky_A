@@ -1,5 +1,5 @@
+# register modules, path, host, port, and the protocol for modules(this one is reserved for future functions)
 MODULES = [
-
     {'id': 'test',
      'protocol': {
          'head': b'<test>.*<test>',
@@ -22,6 +22,8 @@ MODULES = [
      'port': 921
      }
 ]
-MODULES_LIST = {}
+
+# for connecting to module
+MODULES_ADDRESS = {}
 for x in MODULES:
-    MODULES_LIST[x['id']] = (x['host'], x['port'])
+    MODULES_ADDRESS[x['id']] = (x['host'], x['port'])

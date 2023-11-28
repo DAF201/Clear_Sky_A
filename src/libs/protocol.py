@@ -4,6 +4,7 @@ try:
 except:
     from account import verify
 
+# command and file are not yet used
 PROTOCOL_CLEARSKY = {'head': b'^<clearsky>.*<clearsky>$',
                      'ver': b'<clearsky_ver>.*<clearsky_ver>',
                      'sub_prot': b'<clearsky_sub>(.|\n)*<.*>.*<.*>(.|\n)*clearsky_sub>',
@@ -22,6 +23,7 @@ class clearsky_protocol:
             return sub.group(0).decode().replace('<clearsky_sub_type>', '')
         return 'clearsky'
 
+    @classmethod
     def auth(self, data) -> bool:
         auth = search(PROTOCOL_CLEARSKY['auth'], data)
         if auth:
@@ -35,6 +37,7 @@ class clearsky_protocol:
             return verify(id, secret)
         return False
 
+    @classmethod
     def sub_prot(self, data):
         sub_prot_data = search(PROTOCOL_CLEARSKY['sub_prot'], data)
         if sub_prot_data:

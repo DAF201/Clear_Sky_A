@@ -16,6 +16,7 @@ DLL int file_write(char *filename, int size, unsigned char *data)
     fclose(file);
     return res;
 }
+
 DLL unsigned char *file_read(char *filename)
 {
     FILE *file = fopen((const char *)filename, "rb");

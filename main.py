@@ -8,20 +8,23 @@ from src.libs.tools import helper_tool
 from src.libs.path import ROUTE_PATH
 from src.libs.module_loader import MODULES
 
+# all the processes stored here for future usage
 processes = {}
 
 # socket server
 processes['clearsky_socket'] = Popen(
     'python ./src/libs/TCP_socket_server.py')
 
-accounts_update = Thread(target=helper_tool)
-accounts_update.daemon = True
-accounts_update.start()
+# state machine thread
+helper_tools = Thread(target=helper_tool)
+helper_tools.daemon = True
+helper_tools.start()
 
 app = Application(ROUTE_PATH)
 http_server = HTTPServer(app)
 http_server.listen(80)
 
+# load all the modules and run them
 for module in MODULES:
     try:
         processes[module['id']] = Popen(

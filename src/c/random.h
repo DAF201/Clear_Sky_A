@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
+// enum
 static char char_int_dict[] = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'A', 'b', 'B', 'c',
     'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J',
@@ -19,10 +20,14 @@ static char full_dict[] = {
     'R', 's', 'S', 't', 'T', 'u', 'U', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z',
     '~', '`', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+',
     '=', '{', '}', '|', '\\', '<', ',', '>', '.', '?', '/'};
+
+// random username prefix
 static char *__USER = "user_";
 
+// salt
 static char *shio = "shio";
 
+// make a str to int
 DLL int hash_str(char *input, int len)
 {
     int res = len;
@@ -58,6 +63,7 @@ DLL int hash_str(char *input, int len)
     return res;
 }
 
+// generate a random string with given length
 DLL char *random_str(int length)
 {
     char *buffer = (char *)malloc(length + 1);
@@ -69,6 +75,7 @@ DLL char *random_str(int length)
     buffer[length] = '\0';
     return buffer;
 }
+
 struct image
 {
     int height;
@@ -77,6 +84,7 @@ struct image
     int *data;
 };
 
+// image color map
 DLL struct image rand_image(int height, int width, int type)
 {
     struct image new_img;
@@ -119,6 +127,7 @@ DLL char *rand_username()
     return username;
 }
 
+// get last token and create a new one base on it
 DLL int todays_token()
 {
     time_t t = time(NULL);

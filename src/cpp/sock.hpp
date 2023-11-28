@@ -76,7 +76,6 @@ public:
 
     void S_close()
     {
-
         closesocket(client_socket);
         WSACleanup();
     }

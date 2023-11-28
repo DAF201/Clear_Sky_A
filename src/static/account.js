@@ -4,12 +4,10 @@ function load_account_info() {
 
 function request_account_info() {
     let data = JSON_to_obj(http_get("/API?account_info"))
-        // console.log(data)
+    // console.log(data)
     document.getElementById("email").setAttribute("value", data["email"])
     document.getElementById("secret").setAttribute("value", data["secret"])
     document.getElementById("shared_token").setAttribute("value", data["shared_token"])
-
-
 
     // let form = document.createElement("form");
     // form.id = "account_management"

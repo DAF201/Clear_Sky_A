@@ -5,6 +5,7 @@
 #include <random>
 #include <time.h>
 
+// check if prime
 DLL int prime(int input)
 {
     if (input == 2 || input == 3)
@@ -24,6 +25,8 @@ DLL int prime(int input)
     }
     return 1;
 }
+
+// get largest factor
 DLL int factor(int input)
 {
     if (prime(input))
@@ -48,12 +51,14 @@ DLL int factor(int input)
     return upper_bound;
 }
 
+// hash int to int
 DLL int hash_int(int input)
 {
     srand(input);
     return (rand() * rand()) / rand();
 }
 
+// use the one in random.c
 DLL int hash_str(char *input, int len)
 {
     int res = len;
@@ -89,6 +94,7 @@ DLL int hash_str(char *input, int len)
     return res;
 }
 
+// create an random int with in this range
 int rand_range(int lower, int upper)
 {
     if (upper > lower)

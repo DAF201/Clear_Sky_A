@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+// count how many times a pattern appeared
 DLL int regex_count(char *str, char *pattern)
 {
     std::string source = std::string(str);
@@ -13,6 +14,7 @@ DLL int regex_count(char *str, char *pattern)
     return std::distance(std::sregex_iterator(source.begin(), source.end(), words_regex), std::sregex_iterator());
 }
 
+// check if a pattern exist
 DLL int regex_exist(char *str, char *pattern)
 {
     std::string source = std::string(str);
@@ -25,6 +27,7 @@ DLL int regex_exist(char *str, char *pattern)
     return 0;
 }
 
+// search for a pattern, return first appearance
 DLL char *regex_search(char *str, char *pattern)
 {
     std::string source = std::string(str);
@@ -39,6 +42,7 @@ DLL char *regex_search(char *str, char *pattern)
     return e;
 }
 
+// return if the whole string match
 DLL int regex_match(char *str, char *pattern)
 {
     std::string source = std::string(str);
@@ -46,6 +50,7 @@ DLL int regex_match(char *str, char *pattern)
     return (int)regex_match(source, target);
 }
 
+// raeplace the pattern with something
 DLL char *str_replace(char *str, char *pattern, char *new_str)
 {
     std::string source = std::string(str);
