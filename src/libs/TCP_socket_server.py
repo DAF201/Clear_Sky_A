@@ -32,7 +32,7 @@ class ThreadedTCPRequestHandler(BaseRequestHandler):
         while (True):
             data = self.request.recv(1024)
 
-            if data == b'' or data == b'<clearsky>exit<clearsky>':
+            if data in (b'', b'<clearsky>exit<clearsky>'):
                 return
 
             target = decoder.type(data)

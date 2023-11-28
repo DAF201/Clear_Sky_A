@@ -28,7 +28,7 @@ for module in MODULES:
             'python %smain.py' % (module['path']))
         if processes[module['id']]:
             print('module ' + module['id'] + ' loaded')
-    except:
+    except Exception:
         print('failed to load module: %s' % (module['id']))
 
 IOLoop.instance().start()
