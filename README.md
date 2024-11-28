@@ -1,5 +1,7 @@
 # Clear_Sky
 
+UPDATE: now making Clear_Sky_b
+
 A simple modules system with auth and work as network gateway
 
 left: main process
